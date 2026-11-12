@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .card { fill: #ffffff; stroke: #0f1b3d; }
+    .box { fill: #0f1b3d; }
+    .slot { fill: #ffffff; }
+    @media (prefers-color-scheme: dark) {
+      .card { fill: #1a2034; stroke: #eef1f8; }
+      .box { fill: #eef1f8; }
+      .slot { fill: #0e1220; }
+    }
+  </style>
+  <rect class="card" x="10" y="2.5" width="17" height="15" rx="2" stroke-width="1.75"/>
+  <rect class="card" x="5.5" y="6.5" width="17" height="15" rx="2" stroke-width="1.75"/>
+  <line x1="8.5" y1="11.5" x2="19.5" y2="11.5" stroke="#0b62d6" stroke-width="1.75" stroke-linecap="round"/>
+  <path class="box" d="M2.5 17h27v8.5a3.5 3.5 0 0 1-3.5 3.5H6a3.5 3.5 0 0 1-3.5-3.5z"/>
+  <rect class="slot" x="12.5" y="21.25" width="7" height="2.75" rx="1.375"/>
+</svg>

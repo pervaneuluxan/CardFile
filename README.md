@@ -1,40 +1,66 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # CardFile
 =======
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+=======
+# Job Application Tracker
+>>>>>>> first_commit
 
-## Getting Started
+A private Kanban board for a job search: Wish List, Applied, Interviewing, Offer, Rejected.
+Next.js 16 (App Router, server actions), MongoDB/Mongoose, Better Auth, dnd-kit.
 
-First, run the development server:
+## Develop
 
 ```bash
+npm install
+cp .env.example .env.local   # then fill in the values
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+All private values live in `.env.local`, which git ignores. Nothing secret is written in the code.
+`.env.example` lists every variable with a placeholder.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Private? | What it is |
+| --- | --- | --- |
+| `MONGODB_URI` | Yes | Database connection string, including its password |
+| `BETTER_AUTH_SECRET` | Yes | Signs session cookies. Generate with `openssl rand -base64 32` |
+| `BETTER_AUTH_URL` | No | Address the app is served from |
+| `SEED_USER_ID` | Yes | Optional. The account `npm run seed:jobs` fills with sample data |
+| `NEXT_PUBLIC_BETTER_AUTH_URL` | No (sent to the browser) | Same address, used by the sign-in forms |
+| `NEXT_PUBLIC_SITE_URL` | No (sent to the browser) | Public address, used for link previews, the sitemap and canonical links |
 
-## Learn More
+Set the same variables in your hosting provider's settings when you deploy.
 
-To learn more about Next.js, take a look at the following resources:
+## Icons and share image
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`node scripts/generate-icons.mjs` rebuilds `app/favicon.ico`, `app/apple-icon.png`, the manifest icons in
+`public/` and the WebP screenshots. `app/opengraph-image.png` (the link-preview image) is a static file.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Tests
 
-## Deploy on Vercel
+| Command | What it runs |
+| --- | --- |
+| `npm run test:unit` | Vitest + Testing Library in jsdom: board logic (`lib/board-utils.ts`, `lib/build-board.ts`, `lib/stages.ts`), the `useBoard` hook, forms, cards, board |
+| `npm run test:integration` | Real server actions and Mongoose models against an in-memory MongoDB (`mongodb-memory-server`); auth is replaced by a fake session |
+| `npm run test:e2e` | Playwright against `next dev` on port 3100 with its own in-memory MongoDB replica set and build folder (`.next-e2e`) |
+| `npm test` | Unit + integration |
+| `npm run test:all` | Everything |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The tests never touch the database in `.env.local`. The first run downloads a MongoDB binary
+(cached in `~/.cache/mongodb-binaries`), and `npx playwright install chromium` is needed once for e2e.
 
+<<<<<<< HEAD
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 >>>>>>> Initial commit from Create Next App
+=======
+Layout:
+
+```
+tests/unit/          component and logic tests (jsdom)
+tests/integration/   server actions + models (node, in-memory MongoDB)
+e2e/                 Playwright specs, helpers and the e2e server launcher
+```
+>>>>>>> first_commit

@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Lets the e2e server build into its own folder alongside a running `next dev`.
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   experimental: {
     agentFeedback: true,
   },
